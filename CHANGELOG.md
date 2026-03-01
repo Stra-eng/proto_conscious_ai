@@ -35,4 +35,5 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-_Nothing yet._
+### Added
+- GitHub Actions CI workflow — runs unit tests and a simulation smoke test on Python 3.8, 3.10, and 3.12 on every push and pull request to `main`
