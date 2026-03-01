@@ -1,0 +1,15 @@
+[
+  {
+    "Run": 0,
+    "Goal": "avoid_loss",
+    "Steps": 100,
+    "Risk": 0.8,
+    "Auto": 2,
+    "Seed": 7,
+    "BrierScore": 0.2365,
+    "Continuity": 1.0,
+    "StyleFidelity": 1.0,
+    "GoalConsistency": 0.0,
+    "SuggestedRiskAversion": null
+  }
+]
