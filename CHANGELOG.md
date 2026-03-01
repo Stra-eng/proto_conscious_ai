@@ -33,7 +33,22 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [Unreleased]
+## [1.2.0] - 2026-03-02
+
+### Added
+- `src/memory_manager.py` — `MemoryManager` wraps `EpisodicMemory` with conversation turn history in LLM messages format and JSON session persistence (`save` / `load`)
+- `src/reasoning_engine.py` — `ReasoningEngine` wraps the Anthropic API with a heuristic confidence scorer; raises `RuntimeError` at construction if `ANTHROPIC_API_KEY` is missing
+- `src/planner.py` — `ConversationPlanner` scores four response strategies (`answer_directly`, `ask_clarification`, `admit_uncertainty`, `safe_fallback`) using input heuristics and risk-aversion; exposes `last_choice_style` for the `Introspector`
+- `src/agent_core.py` — `AgentCore` orchestrates all modules behind a single `respond()` method; runs introspection every 5 turns and adapts `risk_aversion`; supports `save_session` / `resume_session`
+- `main.py` — interactive REPL entry point with `save <path>` command and clean exit handling
+- `requirements.txt` — `anthropic>=0.40.0` (only external dependency)
+- `SYSTEM_PROMPT.md` — system prompt for using the project as an AI assistant backend
+
+---
+
+## [1.1.0] - 2026-03-02
 
 ### Added
 - GitHub Actions CI workflow — runs unit tests and a simulation smoke test on Python 3.8, 3.10, and 3.12 on every push and pull request to `main`
+
+---
