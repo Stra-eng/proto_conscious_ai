@@ -14,8 +14,10 @@ class Planner:
         actions = list(observation.get("actions", {}).keys()) or ["wait"]
         # Score actions: weigh success prob vs risk preference
         scores = {}
+        pred_probs = {}
         for a in actions:
             p = self.world.predict_success(a, observation)
+            pred_probs[a] = p  # cache so we don't call predict_success twice
             # Risk weighting: penalize "risky" if high risk_aversion; reward if low
             risk_tag = "risky" if "risky" in a else ("safe" if "safe" in a else "neutral")
             bias = 0.0
@@ -28,7 +30,7 @@ class Planner:
 
         # Pick best
         action = max(scores, key=scores.get)
-        p_success = self.world.predict_success(action, observation)
+        p_success = pred_probs[action]  # reuse cached value, no extra noise
         # Track style implied by choice
         if "risky" in action:
             self.last_choice_style = "risk_taking"

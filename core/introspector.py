@@ -25,7 +25,14 @@ class Introspector:
                     is_consistent = action != "wait"
                 if is_consistent:
                     goal_actions += 1
-                if planner.last_choice_style == self_model.predict_choice_style():
+                # infer style per-step from the logged action (same logic as planner)
+                if "risky" in action:
+                    step_style = "risk_taking"
+                elif "safe" in action:
+                    step_style = "safe_preferring"
+                else:
+                    step_style = "balanced"
+                if step_style == self_model.predict_choice_style():
                     consistent_style += 1
 
         brier = brier_sum / n if n else None

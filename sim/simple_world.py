@@ -45,8 +45,7 @@ def run_episode(steps=50, risk_aversion=0.3, autonomy_level=1, seed=42, goal="co
             "outcome": "success" if y == 1 else "fail"
         })
 
-        # Store observation for recall testing
-        agent.memory.add(event={"type": "obs", "data": obs})
+        # Store outcome (obs is already stored by agent.act internally)
         agent.memory.add(event={"type": "outcome", "data": {"t": t, "y": y}})
 
         # Periodically test recall

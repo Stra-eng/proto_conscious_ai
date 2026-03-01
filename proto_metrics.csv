@@ -1,6 +1,4 @@
 Run,Goal,Steps,Risk,Auto,Seed,BrierScore,Continuity,StyleFidelity,GoalConsistency,SuggestedRiskAversion
-0,collect_reward,50,0.55,1,7,0.2375,1.0,0.0,1.0,0.6000000000000001
-1,collect_reward,50,0.55,1,8,0.1664,1.0,0.0,1.0,0.5
-2,collect_reward,50,0.55,1,9,0.2138,1.0,0.0,1.0,0.6000000000000001
-3,collect_reward,50,0.55,1,10,0.2191,1.0,0.0,1.0,0.6000000000000001
-4,collect_reward,50,0.55,1,11,0.155,1.0,0.0,1.0,0.6000000000000001
+0,collect_reward,50,0.55,1,7,0.1955,1.0,0.0,1.0,0.5
+1,collect_reward,50,0.55,1,8,0.1866,1.0,0.0,1.0,0.6000000000000001
+2,collect_reward,50,0.55,1,9,0.1572,1.0,0.0,1.0,0.5
