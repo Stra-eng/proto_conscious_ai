@@ -6,6 +6,25 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.9.0] - 2026-03-02
+
+### Added
+- `src/proto_ai_v3.py` — end-to-end cognitive stack orchestrator with eight-stage pipeline:
+  - `SelfModel` — mood-aware agent state tracker updated before and after each turn
+  - `ConfidenceCalibrator` — heuristic scorer based on epistemic token presence and response length
+  - `OutcomeSimulator` — LLM-backed 3-sentence consequence forecast for draft answers
+  - `ProtoAI` — orchestrates perception → memory retrieval → structured reasoning → confidence calibration → outcome simulation → reflection → memory consolidation → self-model update behind a single `respond()` call
+
+### Fixed
+- `src/proto_ai_v3.py` — `from cognitive_agent_core import` used a non-existent module name; corrected to `from cognitive_agent import`
+- `src/proto_ai_v3.py` — `from memory_continuity_graph import` used a non-existent module name; corrected to `from core.memory_graph import`
+- `src/proto_ai_v3.py` — `Planner` does not exist in `cognitive_agent.py`; corrected to `CognitivePlanner` (imported as `Planner` alias)
+- `src/proto_ai_v3.py` — `ReasoningEngine` does not exist in `cognitive_agent.py`; corrected to `CognitiveReasoningEngine` (imported as `ReasoningEngine` alias)
+- `src/proto_ai_v3.py` — `ImprovementLoop` was imported and assigned to `self.loop` but never called anywhere in `respond()`; removed dead instantiation and import
+- `src/proto_ai_v3.py` — dangling empty string literal `"consequences might ensue.""` (double closing quote) in `OutcomeSimulator.simulate`; corrected to `"consequences might ensue."`
+
+---
+
 ## [1.0.0] - 2026-03-02
 
 ### Added
