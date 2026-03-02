@@ -33,6 +33,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.5.0] - 2026-03-02
+
+### Changed
+- `AgentCore.respond()` now runs `reflect(response, goal)` after every LLM response:
+  - If a cognitive conflict is detected and the strategy is not already `safe_fallback`, the response is regenerated using `safe_fallback` and re-reflected
+  - `self_model.confidence_level` is nudged after each turn using the alignment and uncertainty scores from the report
+  - Episode log entries now include a `reflection` summary string and use `alignment` (not engine score) as the outcome signal
+  - `last_reflection` exposed as a public attribute for callers to inspect the most recent `ReflectionReport`
+
+---
+
 ## [1.4.0] - 2026-03-02
 
 ### Added
