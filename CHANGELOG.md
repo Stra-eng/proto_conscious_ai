@@ -33,6 +33,28 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.8.0] - 2026-03-02
+
+### Added
+- `src/cognitive_agent.py` — modular cognitive agent core with six components:
+  - `ModelAdapter` — OpenAI chat completions wrapper with token counting via `tiktoken`
+  - `ToolRegistry` — dynamic tool registration and invocation; descriptions stored separately from function `__doc__` to avoid mutation side effects
+  - `CognitiveReasoningEngine` — chain-of-thought prompt builder that returns structured JSON (`thought` or `tool_call`)
+  - `CognitivePlanner` — hierarchical task decomposition via LLM; `next_open_task()` traverses the task tree depth-first
+  - `ImprovementLoop` — self-reflection loop: decomposes objectives, dispatches tool calls or generates + critiques answers, stores results in memory
+  - `DataRetentionStore` — JSONL-backed fallback memory store with the same `add_memory()` interface as `MemoryContinuityGraph`
+- Updated `requirements.txt`: `openai>=1.0.0`, `tiktoken>=0.7.0`
+
+### Fixed
+- Wrong import path `memory_continuity_graph` → `core.memory_graph`
+- `FileRetentionStore.add()` used `write_text(..., append=True)` which is not a valid parameter — silently overwrote the file; replaced with `open(..., "a")`
+- `Task.is_done()` required `self.status == "done"` even for parent tasks whose status is never set in `execute()`, causing an infinite loop once all subtasks completed; fixed so tasks with subtasks delegate to their children
+- `assert task` in `execute()` replaced with `raise RuntimeError` — asserts are disabled under `python -O`
+- Class `FileRetentionStore` renamed to `DataRetentionStore` to match component 6 in the module docstring
+- `execute()` called `add_memory()` but `FileRetentionStore` only had `add()` — API mismatch at runtime; `DataRetentionStore` now exposes `add_memory()`; a `_store()` helper handles both interfaces safely
+
+---
+
 ## [1.7.0] - 2026-03-02
 
 ### Added
