@@ -33,6 +33,17 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.4.0] - 2026-03-02
+
+### Added
+- `core/reflector.py` — `reflect(response, goal)` returns a `ReflectionReport` dataclass with three analyses:
+  - `evaluate_alignment` — scores response relevance using length heuristics and goal-specific keyword signals
+  - `measure_uncertainty` — counts hedging markers vs confident markers to estimate expressed uncertainty
+  - `detect_cognitive_conflict` — flags refusals, empty responses, evasion (`collect_reward`), and risk-encouraging language (`avoid_loss`)
+- `ReflectionReport` — typed dataclass with `alignment`, `uncertainty`, `conflict`, `conflict_details`, and a `summary()` method
+
+---
+
 ## [1.3.0] - 2026-03-02
 
 ### Changed
