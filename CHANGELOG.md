@@ -33,6 +33,21 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.6.0] - 2026-03-02
+
+### Added
+- `core/simulator.py` — three simulation functions with a shared `SimContext` dataclass:
+  - `simulate_outcome(action, context)` — resolves a success/failure result using `WorldModel` at sim level or response-quality heuristics at agent level; returns a `SimOutcome` dataclass with `p_success`, `risk_score`, `failure_prob`, and `summary()`
+  - `score_risk(action, context)` — scores riskiness from action-name signals, inverse p_success, response content keywords, and risk-aversion scaling
+  - `predict_failure(action, context)` — combines base failure probability, risk penalty, and response quality penalty
+- `SimContext.from_observation()` — factory for sim-level construction from a `SimpleWorld` observation dict
+- `SimContext.from_self_model()` — factory for agent-level construction from a response and `SelfModel` instance
+
+### Fixed
+- `predict_failure` — removed `if context.response:` guard on quality penalty; empty responses were producing falsely low failure probabilities since the penalty was skipped entirely. `_response_quality` returns `0.0` for empty input, giving maximum penalty correctly.
+
+---
+
 ## [1.5.0] - 2026-03-02
 
 ### Changed
