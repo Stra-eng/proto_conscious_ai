@@ -25,7 +25,11 @@ class Agent:
     """
     def __init__(self, cfg: AgentConfig):
         self.memory = EpisodicMemory(capacity=cfg.memory_capacity)
-        self.self_model = SelfModel(goal=cfg.goal, risk_aversion=cfg.risk_aversion)
+        self.self_model = SelfModel(
+            long_term_goals=[cfg.goal],
+            current_focus=cfg.goal,
+            values={"risk_aversion": cfg.risk_aversion},
+        )
         self.world = WorldModel()
         self.planner = Planner(self_model=self.self_model, world=self.world)
         self.introspector = Introspector()

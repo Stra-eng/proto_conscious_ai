@@ -39,7 +39,12 @@ class AgentCore:
         autonomy_level: int = 1,
         memory_capacity: int = 200,
     ):
-        self.self_model = SelfModel(goal="collect_reward", risk_aversion=risk_aversion)
+        self.self_model = SelfModel(
+            identity={"name": "proto-conscious-agent"},
+            long_term_goals=["collect_reward"],
+            current_focus="collect_reward",
+            values={"risk_aversion": risk_aversion},
+        )
         self.safety = Safety(autonomy_level=autonomy_level)
         self.memory = MemoryManager(capacity=memory_capacity)
         self.engine = ReasoningEngine(model=model)
