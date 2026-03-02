@@ -33,6 +33,23 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.7.0] - 2026-03-02
+
+### Added
+- `core/memory_graph.py` — `MemoryContinuityGraph`, a graph-based cognitive memory substrate that replaces a plain vector database:
+  - Memories are stored as `MemoryNode` objects (content, embedding, timestamp, importance) in a weighted `DiGraph`
+  - New memories are auto-linked to the most similar existing nodes via cosine similarity edges
+  - Edge weights decay exponentially with a one-week half-life; negligible edges are pruned
+  - Retrieval ranks by cognitive salience: semantic similarity + importance + recency decay + graph connectivity strength
+  - `save()` / `load()` for GraphML persistence with hex-encoded embeddings
+- Updated `requirements.txt` with `sentence-transformers>=3.0.0`, `numpy>=1.24.0`, `networkx>=3.0`
+
+### Fixed
+- `save()` — original implementation mutated live graph node data, omitted `content` / `timestamp` / `importance` from the serialized graph, and left an un-serializable `obj` attribute causing `write_graphml` to fail. Fixed by building a clean serializable copy of the graph before writing.
+- `load()` — `np.frombuffer()` returns a read-only view; added `.copy()` to make restored embeddings writable. Edge `weight` and `created` attributes are now also restored.
+
+---
+
 ## [1.6.0] - 2026-03-02
 
 ### Added
