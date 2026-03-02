@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from core.introspector import Introspector
+from core.reflector import ReflectionReport, reflect
 from core.safety import Safety
 from core.self_model import SelfModel
 from src.memory_manager import MemoryManager
@@ -24,6 +25,7 @@ class AgentCore:
       - ReasoningEngine — LLM calls via Anthropic API
       - ConversationPlanner — strategy selection (answer / clarify / fallback)
       - SelfModel      — goal and risk-aversion traits
+      - Reflector      — per-response alignment, uncertainty, and conflict detection
       - Introspector   — post-episode reflection and risk-aversion adaptation
       - Safety         — autonomy caps and kill-switch
 
@@ -52,6 +54,7 @@ class AgentCore:
         self.introspector = Introspector()
         self._episode_log: list[dict] = []
         self._system_prompt = self._load_system_prompt()
+        self.last_reflection: ReflectionReport | None = None
 
     # ------------------------------------------------------------------
     # Public API
@@ -76,16 +79,29 @@ class AgentCore:
         # 4. Generate response via LLM
         response = self._generate(strategy, user_input)
 
-        # 5. Score confidence and store assistant turn
-        confidence = self.engine.score(response, self.self_model.goal)
+        # 5. Reflect on the response — check alignment, uncertainty, conflict
+        report = reflect(response, self.self_model.goal)
+
+        # 5a. If a cognitive conflict is detected, regenerate with safe_fallback
+        if report.conflict and strategy != "safe_fallback":
+            strategy = "safe_fallback"
+            response = self._generate(strategy, user_input)
+            report = reflect(response, self.self_model.goal)
+
+        # 5b. Adapt self-model confidence from alignment and uncertainty scores
+        confidence_delta = (report.alignment - 0.5) * 0.1 - (report.uncertainty - 0.3) * 0.05
+        self.self_model.update_confidence(confidence_delta)
+
+        self.last_reflection = report
         self.memory.add_turn("assistant", response)
 
-        # 6. Log decision for introspection
+        # 6. Log decision for introspection (use alignment as outcome signal)
         self._episode_log.append({
-            "type":      "decision",
-            "action":    strategy,
-            "p_success": p_success,
-            "outcome":   "success" if confidence >= 0.5 else "fail",
+            "type":       "decision",
+            "action":     strategy,
+            "p_success":  p_success,
+            "outcome":    "success" if report.alignment >= 0.5 else "fail",
+            "reflection": report.summary(),
         })
 
         # 7. Periodic introspection and risk-aversion adaptation
