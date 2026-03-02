@@ -33,6 +33,16 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.3.0] - 2026-03-02
+
+### Changed
+- `SelfModel` replaced with a richer identity-aware implementation. New fields: `identity` (dict), `values` (dict), `long_term_goals` (list), `current_focus` (str), `confidence_level` (float). New methods: `set_focus()`, `add_value()`, `update_confidence()`. `goal` and `risk_aversion` are now backward-compatible properties — `Planner`, `Introspector`, and `run_sim.py` required no changes.
+
+### Fixed
+- Updated `SelfModel` constructor call sites in `core/agent.py`, `src/agent_core.py`, and `tests/test_selfmodel.py` to use the new signature.
+
+---
+
 ## [1.2.0] - 2026-03-02
 
 ### Added
