@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Globe — ИИ для работы, без сложностей</title>
+<meta name="description" content="Подключите ИИ к вашей работе за один день. Понятные тарифы, оплата любым способом, счета и договор для компаний.">
+<style>
+:root{--bg:#fff;--fg:#111827;--mut:#5b6472;--line:#e5e7eb;--acc:#4f46e5;--acc2:#eef2ff;--card:#f9fafb}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0f19;--fg:#f3f4f6;--mut:#9aa3b2;--line:#1f2937;--acc:#818cf8;--acc2:#161b33;--card:#111827}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:17px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+.w{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+header .w{display:flex;justify-content:space-between;align-items:center;height:60px}
+nav a{color:var(--mut);text-decoration:none;margin-left:20px;font-size:15px}
+nav a:hover{color:var(--fg)}
+.logo{font-weight:700}
+.btn{display:inline-block;background:var(--acc);color:#fff;padding:12px 22px;border-radius:10px;text-decoration:none;font-weight:600;border:0;cursor:pointer;font-size:16px}
+.btn.o{background:none;color:var(--fg);border:1px solid var(--line)}
+section{padding:72px 0}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.1;margin:0 0 18px;letter-spacing:-.02em}
+h2{font-size:clamp(26px,4vw,36px);margin:0 0 12px;letter-spacing:-.01em}
+.lead{color:var(--mut);font-size:19px;max-width:620px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:32px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.card h3{margin:0 0 6px;font-size:18px}.card p{margin:0;color:var(--mut);font-size:15px}
+.price{font-size:38px;font-weight:700}.price small{font-size:15px;color:var(--mut);font-weight:400}
+.card ul{padding-left:18px;color:var(--mut);font-size:15px;margin:14px 0 20px}
+.card.hot{border-color:var(--acc);background:var(--acc2)}
+.pay{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pay span{border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:14px;color:var(--mut)}
+details{border-bottom:1px solid var(--line);padding:16px 0}summary{cursor:pointer;font-weight:600}
+details p{color:var(--mut);margin:10px 0 0}
+form{display:grid;gap:12px;max-width:520px;margin-top:24px}
+input,select,textarea{font:inherit;padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);width:100%}
+footer{border-top:1px solid var(--line);padding:32px 0;color:var(--mut);font-size:14px}
+footer a{color:var(--mut);margin-right:16px}
+#ok{display:none;color:#059669;font-weight:600}
+</style>
+</head>
+<body>
+<header><div class="w"><span class="logo">🌐 AI Globe</span>
+<nav><a href="#how">Как это работает</a><a href="#pricing">Тарифы</a><a href="#b2b">Для компаний</a><a href="#faq">Вопросы</a></nav></div></header>
+
+<main>
+<section><div class="w">
+<h1>ИИ в вашей работе — за один день, а не за квартал.</h1>
+<p class="lead">Мы подключаем ИИ к вашим задачам: тексты, поддержка, аналитика, автоматизация. Вы платите за результат, а не за модные слова.</p>
+<p style="margin-top:28px"><a class="btn" href="#pricing">Выбрать тариф</a> <a class="btn o" href="#b2b">Договор и счёт для компании</a></p>
+<p class="lead" style="font-size:15px;margin-top:18px">Отмена в любой момент · Возврат в течение 14 дней · Ваши данные не используются для обучения моделей</p>
+</div></section>
+
+<section id="how" style="background:var(--card)"><div class="w">
+<h2>Три шага. Без интеграторов и долгих созвонов.</h2>
+<div class="grid">
+<div class="card"><h3>1. Расскажите о задаче</h3><p>Пять минут: что вы делаете руками и что хотите ускорить.</p></div>
+<div class="card"><h3>2. Получите настройку</h3><p>Мы собираем рабочий процесс под вас и показываем на ваших данных.</p></div>
+<div class="card"><h3>3. Пользуйтесь</h3><p>Команда работает быстрее с первого дня. Поддержка — в чате.</p></div>
+</div></div></section>
+
+<section id="pricing"><div class="w">
+<h2>Простые тарифы</h2>
+<p class="lead">Цена фиксированная. Никаких скрытых лимитов — что входит, написано прямо здесь.</p>
+<div class="grid">
+<div class="card"><h3>Старт</h3><div class="price">$29<small> / мес</small></div>
+<ul><li>1 пользователь</li><li>Основные ИИ-инструменты</li><li>Поддержка по почте</li></ul>
+<a class="btn o" data-pay="start" href="#b2b">Оплатить</a></div>
+<div class="card hot"><h3>Команда</h3><div class="price">$99<small> / мес</small></div>
+<ul><li>До 10 пользователей</li><li>Все инструменты и автоматизации</li><li>Приоритетная поддержка</li><li>Оплата по счёту</li></ul>
+<a class="btn" data-pay="team" href="#b2b">Оплатить</a></div>
+<div class="card"><h3>Компания</h3><div class="price">Индивидуально</div>
+<ul><li>Без лимита пользователей</li><li>Договор, SLA, закрывающие документы</li><li>Персональный менеджер</li></ul>
+<a class="btn o" href="#b2b">Связаться</a></div>
+</div>
+<div class="pay"><span>💳 Карты Visa / Mastercard / МИР*</span><span>Apple Pay</span><span>Google Pay</span><span>SEPA / банковский перевод</span><span>Счёт для юрлиц</span><span>Криптовалюта (USDT, BTC)</span></div>
+<p class="lead" style="font-size:13px;margin-top:10px">* Набор способов зависит от региона и вашего платёжного провайдера.</p>
+</div></section>
+
+<section id="b2b" style="background:var(--card)"><div class="w">
+<h2>Для компаний</h2>
+<p class="lead">Договор, счёт, акты, НДС, оплата по безналу. Ответим в течение одного рабочего дня.</p>
+<form id="f">
+<input name="company" placeholder="Компания" required>
+<input name="name" placeholder="Ваше имя" required>
+<input name="email" type="email" placeholder="Рабочая почта" required>
+<select name="size"><option>Команда 1–10</option><option>11–50</option><option>51–250</option><option>250+</option></select>
+<textarea name="task" rows="3" placeholder="Какую задачу хотите ускорить?"></textarea>
+<button class="btn" type="submit">Отправить заявку</button>
+<span id="ok">Спасибо! Мы свяжемся с вами в течение рабочего дня.</span>
+</form></div></section>
+
+<section id="faq"><div class="w">
+<h2>Частые опасения</h2>
+<details><summary>А если мне не подойдёт?</summary><p>Вернём деньги в течение 14 дней — без вопросов.</p></details>
+<details><summary>Что с моими данными?</summary><p>Они остаются вашими. Мы не используем их для обучения моделей и не передаём третьим лицам.</p></details>
+<details><summary>Нужно ли разбираться в ИИ?</summary><p>Нет. Мы настраиваем всё сами и объясняем простыми словами.</p></details>
+<details><summary>Можно ли оплатить как юрлицо?</summary><p>Да: договор, счёт, закрывающие документы.</p></details>
+<details><summary>Как отменить?</summary><p>В один клик в личном кабинете или письмом — удерживать не будем.</p></details>
+</div></section>
+</main>
+
+<footer><div class="w"><a href="#">Оферта</a><a href="#">Конфиденциальность</a><a href="#">Возвраты</a><br>© AI Globe</div></footer>
+
+<script src="config.js"></script>
+<script>
+const C=window.SITE_CONFIG;
+document.querySelectorAll('[data-pay]').forEach(a=>{const u=C.payLinks[a.dataset.pay];if(u&&u!=="#")a.href=u});
+document.getElementById('f').addEventListener('submit',async e=>{
+  e.preventDefault();const d=Object.fromEntries(new FormData(e.target));
+  if(C.b2bEndpoint){
+    try{await fetch(C.b2bEndpoint,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(d)});
+    document.getElementById('ok').style.display='block';e.target.reset();return}catch(_){}
+  }
+  location.href='mailto:'+C.contactEmail+'?subject='+encodeURIComponent('B2B: '+d.company)+'&body='+encodeURIComponent(JSON.stringify(d,null,2));
+});
+</script>
+</body>
+</html>
